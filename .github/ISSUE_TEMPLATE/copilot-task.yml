@@ -1,0 +1,43 @@
+name: Copilot Agent Task Request
+description: Request a task, bug fix, or refactor to be executed by GitHub Copilot Agent.
+title: 'Copilot Task: [Short description of task]'
+labels: ['help wanted', 'enhancement']
+assignees: ['copilot']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to request a new feature, a bug fix, or refactor from GitHub Copilot. 
+        When Copilot picks up this task, it will follow the instructions below and reference `.github/copilot-instructions.md`.
+  - type: textarea
+    id: problem-statement
+    attributes:
+      label: Problem Statement / Request
+      description: Clear and detailed description of what needs to be implemented or fixed.
+      placeholder: Describe the desired changes, features, or bug fix.
+    validations:
+      required: true
+  - type: dropdown
+    id: preferred-agent
+    attributes:
+      label: Preferred Copilot Agent / Role
+      description: Choose which specialized agent context is most relevant for this task.
+      options:
+        - 'general-purpose (Full-capability implementation agent)'
+        - 'explore (Exploration and repository research)'
+        - 'code-review (Read-only review of PR / branch changes)'
+        - 'security-review (Security vulnerability audit and validation)'
+    validations:
+      required: true
+  - type: checkboxes
+    id: compliance
+    attributes:
+      label: Development & Compliance Checks
+      description: Select which standards this task must comply with.
+      options:
+        - label: Must comply with Security & escaping guidelines in `copilot-instructions.md`
+          required: true
+        - label: Must pass the automated linting/GHA workflow run
+          required: true
+        - label: Must run a security scan of modified files before committing
+          required: true
